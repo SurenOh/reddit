@@ -7,7 +7,7 @@ import retrofit2.http.Query
 interface TopService {
 
     @GET("/top.json")
-    fun getTopReddits(): RedditResponse?
+    fun firstPage(): RedditResponse?
 
     @GET("/top.json")
     fun nextPage(@Query("after") after: String): RedditResponse?

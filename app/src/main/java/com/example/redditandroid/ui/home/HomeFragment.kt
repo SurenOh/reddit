@@ -1,4 +1,4 @@
-package com.example.redditandroid.ui
+package com.example.redditandroid.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

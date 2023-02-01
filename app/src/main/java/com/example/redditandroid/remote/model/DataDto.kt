@@ -8,6 +8,6 @@ data class DataDto(
     val modhash: String,
     @SerializedName("geo_filter")
     val geoFilter: String,
-    val children: List<TopRedditDto>,
+    val children: ArrayList<TopRedditDto>,
     val before: String
 )
