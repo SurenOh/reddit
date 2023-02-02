@@ -6,9 +6,9 @@ import com.example.redditandroid.remote.service.TopService
 
 class TopRepositoryImpl(private val topService: TopService, private val topMapper: TopMapper): TopRepository {
 
-    override fun getFirstPage() = topMapper.mapListDtoToModel(topService.firstPage()?.data?.children)
+    override suspend fun getFirstPage() = topMapper.mapListDtoToModel(topService.firstPage()?.data?.children)
 
-    override fun nextPage(): ArrayList<TopRedditModel> {
+    override suspend fun nextPage(): ArrayList<TopRedditModel> {
         TODO("Not yet implemented")
     }
 
