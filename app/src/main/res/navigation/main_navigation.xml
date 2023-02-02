@@ -22,8 +22,5 @@
         <argument
             android:name="image"
             app:argType="string" />
-        <argument
-            android:name="isVideo"
-            app:argType="boolean" />
     </fragment>
 </navigation>

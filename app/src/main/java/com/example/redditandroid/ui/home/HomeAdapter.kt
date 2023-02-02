@@ -11,11 +11,15 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 typealias OnClickImageCallBack = (String?, Boolean?) -> Unit
+typealias LoadMore = (String) -> Unit
 
 class HomeAdapter(var redditsList: ArrayList<TopRedditModel>): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     private lateinit var binding: RedditItemBinding
 
     var onClickImage: OnClickImageCallBack? = null
+    var loadMore: LoadMore? = null
+
+    private var isLoading = false
 
     override fun getItemCount() = redditsList.size
 
@@ -25,6 +29,12 @@ class HomeAdapter(var redditsList: ArrayList<TopRedditModel>): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (position >= redditsList.size.minus(10) && !isLoading) {
+            isLoading = true
+            redditsList.last().name?.let {
+                loadMore?.invoke(it)
+            }
+        }
         holder.bind(position)
     }
 
@@ -57,7 +67,16 @@ class HomeAdapter(var redditsList: ArrayList<TopRedditModel>): RecyclerView.Adap
     }
 
     fun setReddits(newReddits: ArrayList<TopRedditModel>) {
-        redditsList = newReddits
+        redditsList.clear()
+        redditsList.addAll(newReddits)
+        isLoading = false
         notifyDataSetChanged()
+    }
+
+    fun addItems(newReddits: ArrayList<TopRedditModel>) {
+        val position = redditsList.size
+        redditsList.addAll(newReddits)
+        isLoading = false
+        notifyItemInserted(position)
     }
 }

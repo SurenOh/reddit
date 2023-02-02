@@ -9,11 +9,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val topRepository: TopRepository): ViewModel() {
-    val reddits = MutableLiveData<ArrayList<TopRedditModel>>()
+    val firstReddits = MutableLiveData<ArrayList<TopRedditModel>>()
+    val pagingReddits = MutableLiveData<ArrayList<TopRedditModel>>()
 
     fun firstPage() {
         viewModelScope.launch(Dispatchers.IO) {
-            reddits.postValue(topRepository.firstPage())
+            firstReddits.postValue(topRepository.firstPage())
+        }
+    }
+
+    fun nextPage(after: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            pagingReddits.postValue(topRepository.nextPage(after))
         }
     }
 

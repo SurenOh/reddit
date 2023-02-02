@@ -18,25 +18,35 @@ class HomeFragment : BaseFragment() {
     private val viewModel: HomeViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (_binding == null) _binding = FragmentHomeBinding.inflate(layoutInflater)
+        if (_binding == null) {
+            _binding = FragmentHomeBinding.inflate(layoutInflater)
+            viewModel.firstPage()
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        setupPages()
         setupAdapters()
         setupObservers()
-        viewModel.firstPage()
+    }
+
+    private fun setupPages() {
         binding.btnUpdate.setOnClickListener {
+            _binding = FragmentHomeBinding.inflate(layoutInflater)
             viewModel.firstPage()
         }
     }
 
     private fun setupObservers() {
-        viewModel.reddits.observe(viewLifecycleOwner) { reddits ->
+        viewModel.pagingReddits.observe(viewLifecycleOwner) { reddits ->
+            if (reddits.isNotEmpty())adapter.addItems(reddits)
+        }
+        viewModel.firstReddits.observe(viewLifecycleOwner) { reddits ->
             adapter.setReddits(reddits)
+            binding.rvRedditList.scheduleLayoutAnimation()
         }
     }
 
@@ -48,14 +58,17 @@ class HomeFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
 
-        adapter.onClickImage = {image, isVideo ->
+        adapter.onClickImage = { image, isVideo ->
             if (isVideo == false) {
                 image?.let {
-                    findNavController().navigate(HomeFragmentDirections.goToDetail(image, isVideo))
+                    findNavController().navigate(HomeFragmentDirections.goToDetail(image))
                 }
             } else {
                 snackBarMessage("This reddit doesn't have an image")
             }
+        }
+        adapter.loadMore = { offset ->
+            viewModel.nextPage(offset)
         }
     }
 
