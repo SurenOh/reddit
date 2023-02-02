@@ -1,16 +1,16 @@
 package com.example.redditandroid.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.redditandroid.databinding.FragmentHomeBinding
+import com.example.redditandroid.ui.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -46,6 +46,16 @@ class HomeFragment : Fragment() {
         binding.rvRedditList.apply {
             adapter = this@HomeFragment.adapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        }
+
+        adapter.onClickImage = {image, isVideo ->
+            if (isVideo == false) {
+                image?.let {
+                    findNavController().navigate(HomeFragmentDirections.goToDetail(image, isVideo))
+                }
+            } else {
+                snackBarMessage("This reddit doesn't have an image")
+            }
         }
     }
 

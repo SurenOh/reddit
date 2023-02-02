@@ -13,7 +13,7 @@ class HomeViewModel(private val topRepository: TopRepository): ViewModel() {
 
     fun firstPage() {
         viewModelScope.launch(Dispatchers.IO) {
-            reddits.postValue(topRepository.getFirstPage())
+            reddits.postValue(topRepository.firstPage())
         }
     }
 

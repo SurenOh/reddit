@@ -22,10 +22,10 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Undead917" />
+            tools:text="Author" />
 
         <ImageView
-            android:id="@+id/reddit_thumbnail"
+            android:id="@+id/iv_reddit_thumbnail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
@@ -39,7 +39,7 @@
             android:layout_margin="4dp"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/reddit_thumbnail"
+            app:layout_constraintStart_toEndOf="@id/iv_reddit_thumbnail"
             app:layout_constraintTop_toBottomOf="@id/tv_author"
             tools:text="title" />
 
@@ -56,7 +56,7 @@
             tools:text="4 hours ago" />
 
         <ImageView
-            android:id="@+id/comment_icon"
+            android:id="@+id/iv_comment_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_comment"
@@ -74,7 +74,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/comment_icon"
+            app:layout_constraintEnd_toStartOf="@id/iv_comment_icon"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             tools:text="500" />
 

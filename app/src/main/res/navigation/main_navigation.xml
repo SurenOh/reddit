@@ -8,5 +8,22 @@
         android:id="@+id/homeFragment"
         android:name="com.example.redditandroid.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/goToDetail"
+            app:destination="@id/detailFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.redditandroid.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="image"
+            app:argType="string" />
+        <argument
+            android:name="isVideo"
+            app:argType="boolean" />
+    </fragment>
 </navigation>

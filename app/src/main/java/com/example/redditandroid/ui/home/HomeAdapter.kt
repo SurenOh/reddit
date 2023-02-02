@@ -45,11 +45,11 @@ class HomeAdapter(var redditsList: ArrayList<TopRedditModel>): RecyclerView.Adap
             val requestOptions = RequestOptions()
                 .override(reddit.thumbnailWidth ?: 120, reddit.thumbnailHeight ?: 120)
 
-            Glide.with(binding.redditThumbnail.context)
+            Glide.with(binding.ivRedditThumbnail.context)
                 .load(reddit.thumbnail)
                 .apply(requestOptions)
-                .into(redditThumbnail)
-            redditThumbnail.setOnClickListener { onClickImage?.invoke(reddit.image, reddit.isVideo) }
+                .into(ivRedditThumbnail)
+            ivRedditThumbnail.setOnClickListener { onClickImage?.invoke(reddit.image, reddit.isVideo) }
         }
 
         private fun getRelativeTime(redditTime: Double) = (Date().time - redditTime.toLong() * 1000) / 3600000
