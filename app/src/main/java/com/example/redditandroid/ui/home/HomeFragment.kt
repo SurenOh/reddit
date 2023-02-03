@@ -61,7 +61,7 @@ class HomeFragment : BaseFragment() {
         adapter.onClickImage = { image, isVideo ->
             if (isVideo == false) {
                 image?.let {
-                    findNavController().navigate(HomeFragmentDirections.goToDetail(image))
+                    navigate(HomeFragmentDirections.goToDetail(image))
                 }
             } else {
                 snackBarMessage("This reddit doesn't have an image")

@@ -1,5 +1,6 @@
 package com.example.redditandroid.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +41,7 @@ class HomeAdapter(var redditsList: ArrayList<TopRedditModel>): RecyclerView.Adap
 
     inner class ViewHolder(private val binding: RedditItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-
+        @SuppressLint("SetTextI18n")
         fun bind(position: Int) = with(binding) {
             val reddit = redditsList[position]
             tvAuthor.text = reddit.author
@@ -65,7 +66,7 @@ class HomeAdapter(var redditsList: ArrayList<TopRedditModel>): RecyclerView.Adap
         private fun getRelativeTime(redditTime: Double) = (Date().time - redditTime.toLong() * 1000) / 3600000
 
     }
-
+    @SuppressLint("NotifyDataSetChanged")
     fun setReddits(newReddits: ArrayList<TopRedditModel>) {
         redditsList.clear()
         redditsList.addAll(newReddits)
